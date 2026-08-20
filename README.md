@@ -1,2 +1,18 @@
-# manguolabs-website
-Official ManguoLabs website, articles, assets, and technical resources.
+# ManguoLabs Website
+
+## 项目介绍
+ManguoLabs 官方网站与技术内容仓库，用于承载品牌页面、文章、静态资源及相关技术专题。
+
+## 用途
+- 维护官网内容与静态资源
+- 发布文章和技术资料
+- 整理 Node Firewall、XBoard 安全审计及节点扩展相关内容
+- 维护搜索引擎基础文件
+
+## 当前状态
+基础架构初始化阶段。尚未配置自动部署，也未连接生产服务器。
+
+## 后续规划
+- 确认官网技术栈与内容迁移方案
+- 完善 SEO 元数据、robots.txt 与 sitemap.xml
+- 建立独立的测试、审核和发布流程
