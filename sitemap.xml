@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <!-- Add verified production URLs before publishing. -->
+<urlset xmlns="http://www.sitemaps.org/sitemap/0.9">
+<url><loc>https://manguolabs.com/</loc><lastmod>2026-08-18</lastmod><changefreq>weekly</changefreq></url>
+<url><loc>https://manguolabs.com/node-firewall/</loc><lastmod>2026-08-18</lastmod><changefreq>weekly</changefreq></url>
+<url><loc>https://manguolabs.com/xboard-security-audit/</loc><lastmod>2026-08-18</lastmod><changefreq>weekly</changefreq></url>
+<url><loc>https://manguolabs.com/xboard-node-extension/</loc><lastmod>2026-08-18</lastmod><changefreq>weekly</changefreq></url>
+<url><loc>https://manguolabs.com/articles/</loc><lastmod>2026-08-18</lastmod><changefreq>weekly</changefreq></url>
+<url><loc>https://manguolabs.com/articles/node-ip-blocked/</loc><lastmod>2026-08-18</lastmod><changefreq>weekly</changefreq></url>
+<url><loc>https://manguolabs.com/articles/xboard-token-multi-ip/</loc><lastmod>2026-08-18</lastmod><changefreq>weekly</changefreq></url>
+<url><loc>https://manguolabs.com/articles/xboard-free-node-collector/</loc><lastmod>2026-08-18</lastmod><changefreq>weekly</changefreq></url>
 </urlset>
