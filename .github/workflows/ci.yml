@@ -29,17 +29,18 @@ jobs:
         run: |
           set -euo pipefail
           required=(
-            assets/css/style.css
-            assets/js/main.js
+            assets/style.css
+            assets/favicon.svg
             index.html
-            node-firewall.html
+            node-firewall/index.html
             robots.txt
             sitemap.xml
-            xboard-node-extension.html
-            xboard-security-audit.html
-            articles/node-firewall.html
-            articles/xboard-node-extension.html
-            articles/xboard-security-audit.html
+            xboard-node-extension/index.html
+            xboard-security-audit/index.html
+            articles/index.html
+            articles/node-ip-blocked/index.html
+            articles/xboard-free-node-collector/index.html
+            articles/xboard-token-multi-ip/index.html
           )
           for path in "${required[@]}"; do
             test -f "$path" || {
