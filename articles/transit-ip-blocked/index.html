@@ -74,8 +74,8 @@
         </ul>
 
         <h2>从“恢复一次”走向中转高可用</h2>
-        <p>机场中转防封不能理解为“永久不受影响”。更可验证的目标是减少共享单点、缩短发现时间、让切换可控并支持回滚。实践中可使用多入口或多中转、独立健康检查、配置版本记录、备用容量和人工接管机制。每次切换都应回答三个问题：为什么切、切到哪里、失败后如何恢复。</p>
-        <p>如果当前架构无法区分入口、中转与落地责任边界，或者多条线路依赖同一入口，建议先阅读<a class="link" href="/articles/node-ip-blocked/">机场节点 IP 失效的入口、中转与落地区分方法</a>，再评估<a class="link" href="/node-firewall/">机场节点与中转高可用解决方案</a>。公开的排查框架也整理在 <a class="link" href="https://github.com/ManguoLabs/node-firewall-solution">ManguoLabs/node-firewall-solution</a>。</p>
+        <p>机场中转防封不能理解为对不确定网络环境作绝对保证。更可验证的目标是减少共享单点、缩短发现时间、让切换可控并支持回滚。实践中可使用多入口或多中转、独立健康检查、配置版本记录、备用容量和人工接管机制。每次切换都应回答三个问题：为什么切、切到哪里、失败后如何恢复。</p>
+        <p>如果当前架构无法区分入口、中转与落地责任边界，或者多条线路依赖同一入口，建议先阅读<a class="link" href="/articles/node-ip-blocked/">机场节点 IP 失效的入口、中转与落地区分方法</a>。Manguo Labs 为机场运营者提供<a class="link" href="/node-firewall/">机场高可用入口解决方案</a>，用于入口、中转与落地反复失效且需要故障隔离、受控切换与回滚的场景。公开的排查框架也整理在 <a class="link" href="https://github.com/ManguoLabs/node-firewall-solution">ManguoLabs/node-firewall-solution</a>。</p>
 
         <h2>常见问题</h2>
         <div class="faq">
@@ -95,7 +95,7 @@
           <p>不能。自动切换只能处理已定义且可观测的故障，还需要容量、健康检查、抖动抑制、回滚和人工接管。</p>
         </div>
         <div class="faq">
-          <h3>中转高可用是否等于永久不封？</h3>
+          <h3>中转高可用是否能作绝对防封保证？</h3>
           <p>不等于。高可用用于降低单点风险和恢复成本，不能对不确定的网络环境作永久保证。</p>
         </div>
 
