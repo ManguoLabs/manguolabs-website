@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>中转IP被墙怎么办？机场入口、中转和落地线路排查方法｜Manguo Labs</title>
+  <meta name="description" content="中转IP被墙或机场中转失效时，如何区分入口、中转、落地与服务故障？按分层步骤排查中转IP被封、线路失效和高可用切换问题。">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <link rel="canonical" href="https://manguolabs.com/articles/transit-ip-blocked/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="中转IP被墙怎么办？机场入口、中转和落地线路排查方法｜Manguo Labs">
+  <meta property="og:description" content="从入口、中转、落地和服务状态分层判断中转 IP 被墙、被封或线路失效，避免只换 IP 的反复试错。">
+  <meta property="og:url" content="https://manguolabs.com/articles/transit-ip-blocked/">
+  <meta property="og:site_name" content="Manguo Labs">
+  <meta name="theme-color" content="#0b1220">
+  <link rel="icon" href="/assets/favicon.svg">
+  <link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+<header>
+  <div class="container nav">
+    <a class="brand" href="/"><span class="logo">M</span><span>Manguo Labs</span></a>
+    <nav><a href="/#solutions">解决方案</a><a href="/articles/">技术文章</a><a href="https://t.me/ManguoShop_bot">Telegram</a></nav>
+  </div>
+</header>
+<main>
+  <section class="page-hero">
+    <div class="container">
+      <span class="eyebrow">技术文章</span>
+      <h1>中转 IP 被墙怎么办？机场入口、中转和落地线路排查方法</h1>
+      <p class="lead">遇到机场中转 IP 被墙、中转 IP 被封或中转线路失效时，先分段确认客户端到入口、入口到中转、中转到落地分别是否正常，再决定修服务、调路由还是切换线路。</p>
+    </div>
+  </section>
+  <section>
+    <div class="container content-wrap">
+      <article class="content">
+        <h2>直接答案：先定位故障段，不要立刻批量换 IP</h2>
+        <p>“中转挂了”只是用户看到的结果，并不能说明中转 IP 一定被墙。相同症状还可能来自进程退出、端口未监听、安全组变化、连接数耗尽、上游路由波动、落地节点不可达或配置发布错误。可靠的处理顺序是：先确认服务端本身健康，再用多个独立网络测试客户端到入口和中转的可达性，同时从中转机测试到落地的连接。只有证据持续指向某一段网络不可达，才进入切换或替换流程。</p>
+
+        <h2>先画清入口、中转和落地三段链路</h2>
+        <p>常见线路通常包含客户端、入口或中转、落地节点和目标服务。不同架构可能把入口与中转放在同一台机器，也可能经过多级转发。排查前应写清每一跳的职责、协议、端口和预期方向，避免把“入口 IP 被封”“机场中转失效”和落地服务故障混成同一个问题。</p>
+        <ul>
+          <li><strong>客户端到入口或中转：</strong>确认不同运营商、不同地区是否都无法建立连接。</li>
+          <li><strong>中转到落地：</strong>从中转服务器主动测试落地端口、路由、丢包和时延。</li>
+          <li><strong>落地服务：</strong>确认进程、监听、证书、协议参数和资源使用正常。</li>
+        </ul>
+
+        <h2>中转线路失效的常见原因</h2>
+        <h3>1. 服务或端口异常</h3>
+        <p>进程重启失败、监听地址错误、证书过期或防火墙规则改变，都会表现为“中转机被墙”。如果服务器本地连接也失败，应先解决服务问题，不要把新 IP 当成修复手段。</p>
+        <h3>2. 路由、容量或供应商波动</h3>
+        <p>跨网路由变化、带宽拥塞、连接数耗尽和临时丢包可能只影响部分地区。此时多地点结果通常不一致，需要结合服务器监控与持续探测判断。</p>
+        <h3>3. 入口段持续不可达</h3>
+        <p>如果中转到落地正常、服务端监听正常，但多个独立客户端网络长时间无法到达同一入口，才有较强依据把中转 IP 被封或网络层阻断列为主要假设。</p>
+        <h3>4. 发布或配置变更</h3>
+        <p>节点批量失效如果紧跟配置发布、端口调整或证书更新，应优先回看变更记录。配置问题通常会在所有测试网络稳定复现，而网络问题更可能存在地区和运营商差异。</p>
+
+        <h2>中转 IP 被封如何排查：六个分层步骤</h2>
+        <ol>
+          <li><strong>记录现场：</strong>保存发生时间、受影响线路、协议、端口、地区和客户端错误类型，不要只记录“全红”。</li>
+          <li><strong>检查服务器：</strong>确认进程、监听端口、CPU、内存、连接数、安全组和最近变更。</li>
+          <li><strong>验证后半段：</strong>从中转机测试落地节点。如果后半段失败，先修复落地、路由或转发配置。</li>
+          <li><strong>多网络复测前半段：</strong>使用至少两个独立运营商或地区测试到中转入口，区分局部网络故障与普遍不可达。</li>
+          <li><strong>对比备用线路：</strong>比较相同配置下的备用入口、其他端口或同供应商其他地址，观察问题是否跟随 IP。</li>
+          <li><strong>受控切换：</strong>证据充分后再切换，保留旧配置、切换时间和回滚方式，并继续观察恢复是否稳定。</li>
+        </ol>
+
+        <h2>常见误区</h2>
+        <ul>
+          <li><strong>一次超时就判断被墙：</strong>单一探针可能遇到本地网络或 DNS 问题。</li>
+          <li><strong>只换 IP，不处理根因：</strong>如果暴露方式、入口结构和维护流程不变，新地址仍可能重复失效。</li>
+          <li><strong>所有线路一起切：</strong>没有分批验证和回滚会扩大故障影响。</li>
+          <li><strong>自动切换只看单点：</strong>单次失败会造成频繁抖动，应组合多点探测、连续失败阈值和冷却期。</li>
+        </ul>
+
+        <h2>从“恢复一次”走向中转高可用</h2>
+        <p>机场中转防封不能理解为“永久不受影响”。更可验证的目标是减少共享单点、缩短发现时间、让切换可控并支持回滚。实践中可使用多入口或多中转、独立健康检查、配置版本记录、备用容量和人工接管机制。每次切换都应回答三个问题：为什么切、切到哪里、失败后如何恢复。</p>
+        <p>如果当前架构无法区分入口、中转与落地责任边界，或者多条线路依赖同一入口，建议先阅读<a class="link" href="/articles/node-ip-blocked/">机场节点 IP 失效的入口、中转与落地区分方法</a>，再评估<a class="link" href="/node-firewall/">机场节点与中转高可用解决方案</a>。公开的排查框架也整理在 <a class="link" href="https://github.com/ManguoLabs/node-firewall-solution">ManguoLabs/node-firewall-solution</a>。</p>
+
+        <h2>常见问题</h2>
+        <div class="faq">
+          <h3>中转 IP 被墙怎么办？</h3>
+          <p>先检查中转服务和中转到落地链路，再从多个独立网络测试客户端到中转。确认网络层持续不可达后，才执行受控切换。</p>
+        </div>
+        <div class="faq">
+          <h3>中转机被墙与落地节点故障怎么区分？</h3>
+          <p>从中转机直接测试落地。如果中转到落地失败，应先排查落地、路由或转发配置；如果后半段正常而前半段多地不可达，再关注中转入口。</p>
+        </div>
+        <div class="faq">
+          <h3>换了中转 IP 为什么还是很快失效？</h3>
+          <p>可能只替换了地址，没有改变暴露方式、入口结构、端口策略或切换流程。应复盘问题是否跟随配置和架构重复出现。</p>
+        </div>
+        <div class="faq">
+          <h3>自动切换能解决所有中转线路失效吗？</h3>
+          <p>不能。自动切换只能处理已定义且可观测的故障，还需要容量、健康检查、抖动抑制、回滚和人工接管。</p>
+        </div>
+        <div class="faq">
+          <h3>中转高可用是否等于永久不封？</h3>
+          <p>不等于。高可用用于降低单点风险和恢复成本，不能对不确定的网络环境作永久保证。</p>
+        </div>
+
+        <h2>相关内容</h2>
+        <ul>
+          <li><a class="link" href="/articles/node-ip-blocked/">机场节点 IP 为什么会频繁失效？</a></li>
+          <li><a class="link" href="/node-firewall/">机场节点与中转高可用解决方案</a></li>
+          <li><a class="link" href="/articles/">返回技术文章列表</a></li>
+        </ul>
+      </article>
+      <aside class="sidebar">
+        <div class="side">
+          <h3>需要结合现有线路评估？</h3>
+          <p>先整理入口、中转、落地和故障证据，再咨询适合的排查与高可用方案。</p>
+          <a class="btn primary" href="https://t.me/ManguoShop_bot">进入 ManguoShop</a>
+          <a class="btn" href="/node-firewall/">查看对应方案</a>
+          <a class="btn" href="/articles/">返回文章列表</a>
+        </div>
+      </aside>
+    </div>
+  </section>
+</main>
+<footer>
+  <div class="container footer">
+    <div><div class="brand"><span class="logo">M</span><span>Manguo Labs</span></div><p>Digital Products & Technology Solutions</p></div>
+    <div><a href="/node-firewall/">线路高可用</a><a href="/xboard-security-audit/">订阅安全审计</a><a href="/xboard-node-extension/">节点扩展与采集</a></div>
+    <div><a href="/articles/">技术文章</a><a href="https://t.me/ManguoShop_bot">ManguoShop Bot</a></div>
+  </div>
+  <div class="container copy">© 2026 Manguo Labs</div>
+</footer>
+</body>
+</html>
