@@ -26,30 +26,86 @@ jobs:
         run: |
           set -euo pipefail
           stage="$RUNNER_TEMP/manguolabs-release"
-          mkdir -p "$stage/assets" "$stage/articles/node-ip-blocked" \
-            "$stage/articles/xboard-free-node-collector" \
-            "$stage/articles/xboard-token-multi-ip" \
-            "$stage/node-firewall" "$stage/xboard-node-extension" \
-            "$stage/xboard-security-audit"
+          mkdir -p "$stage"
 
           files=(
-            assets/style.css
-            assets/favicon.svg
             index.html
-            node-firewall/index.html
             robots.txt
             sitemap.xml
-            xboard-node-extension/index.html
-            xboard-security-audit/index.html
-            articles/index.html
-            articles/node-ip-blocked/index.html
-            articles/xboard-free-node-collector/index.html
-            articles/xboard-token-multi-ip/index.html
+          )
+          directories=(
+            assets
+            articles
+            node-firewall
+            xboard-security-audit
+            xboard-node-extension
           )
 
           for path in "${files[@]}"; do
             test -f "$path"
-            cp --parents "$path" "$stage"
+            cp "$path" "$stage/"
+          done
+
+          for path in "${directories[@]}"; do
+            test -d "$path"
+            cp -a "$path" "$stage/"
+          done
+
+          find "$stage" -type f -name .gitkeep -delete
+
+          forbidden_paths=$(find "$stage" \( \
+            \( -type d \( -name .git -o -name .github \) \) -o \
+            \( -type f \( \
+              -name README.md -o -name DEPLOY.md -o -name CHANGELOG.md -o \
+              -name '.env' -o -name '.env.*' -o -name '*.pem' -o \
+              -name '*.key' -o -name '*.sql' -o -name '*.sqlite' -o \
+              -name '*.sqlite.*' -o -name 'id_rsa*' -o -name 'id_ed25519*' \
+            \) \) \
+          \) -print)
+          if test -n "$forbidden_paths"; then
+            echo "Forbidden file or directory detected in release candidate:"
+            echo "$forbidden_paths"
+            exit 1
+          fi
+
+          while IFS= read -r -d '' article; do
+            test -f "$stage/$article" || {
+              echo "Published article is missing from release candidate: $article"
+              exit 1
+            }
+          done < <(find articles -mindepth 2 -maxdepth 2 -type f \
+            -name index.html -print0)
+
+          while IFS= read -r site_path; do
+            if test -z "$site_path"; then
+              page=index.html
+            else
+              page="${site_path%/}/index.html"
+            fi
+            if test -f "$page"; then
+              test -f "$stage/$page" || {
+                echo "Sitemap page is missing from release candidate: $page"
+                exit 1
+              }
+            fi
+          done < <(sed -n \
+            's#.*<loc>https://manguolabs.com/\([^<]*\)</loc>.*#\1#p' \
+            sitemap.xml)
+
+          required_release_paths=(
+            assets/style.css
+            assets/favicon.svg
+            articles/index.html
+            articles/transit-ip-blocked/index.html
+            node-firewall/index.html
+            xboard-security-audit/index.html
+            xboard-node-extension/index.html
+            index.html
+            robots.txt
+            sitemap.xml
+          )
+          for path in "${required_release_paths[@]}"; do
+            test -f "$stage/$path"
           done
 
           (
@@ -61,6 +117,25 @@ jobs:
           )
 
           tar -C "$stage" -czf "$RUNNER_TEMP/manguolabs-release.tar.gz" .
+          tar -tzf "$RUNNER_TEMP/manguolabs-release.tar.gz" \
+            > "$RUNNER_TEMP/manguolabs-release-contents.txt"
+
+          while IFS= read -r -d '' article; do
+            grep -Fxq "./$article" \
+              "$RUNNER_TEMP/manguolabs-release-contents.txt" || {
+                echo "Published article is missing from release archive: $article"
+                exit 1
+              }
+          done < <(find articles -mindepth 2 -maxdepth 2 -type f \
+            -name index.html -print0)
+
+          release_file_count=$(find "$stage" -type f | wc -l)
+          article_page_count=$(find "$stage/articles" -mindepth 2 -maxdepth 2 \
+            -type f -name index.html | wc -l)
+          manifest_entry_count=$(wc -l < "$stage/MANIFEST.sha256")
+          echo "Release candidate file count: $release_file_count"
+          echo "Article page count: $article_page_count"
+          echo "Manifest entry count: $manifest_entry_count"
           echo "Release candidate assembled locally on the GitHub runner."
           echo "No server connection or deployment command was executed."
 
