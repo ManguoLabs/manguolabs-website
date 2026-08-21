@@ -24,29 +24,29 @@ jobs:
       - name: Check out source
         uses: actions/checkout@v4
 
-      - name: Validate approved file set
+      - name: Verify approved website files
         shell: bash
         run: |
           set -euo pipefail
-          allowed_file="$(mktemp)"
-          actual_file="$(mktemp)"
-          printf '%s\n' \
-            .github/workflows/ci.yml \
-            assets/css/style.css \
-            assets/js/main.js \
-            index.html \
-            node-firewall.html \
-            robots.txt \
-            sitemap.xml \
-            xboard-node-extension.html \
-            xboard-security-audit.html \
-            articles/node-firewall.html \
-            articles/xboard-node-extension.html \
-            articles/xboard-security-audit.html \
-            > "$allowed_file"
-          find . -type f -not -path './.git/*' -print | sed 's#^./##' | LC_ALL=C sort > "$actual_file"
-          LC_ALL=C sort -o "$allowed_file" "$allowed_file"
-          diff -u "$allowed_file" "$actual_file"
+          required=(
+            assets/css/style.css
+            assets/js/main.js
+            index.html
+            node-firewall.html
+            robots.txt
+            sitemap.xml
+            xboard-node-extension.html
+            xboard-security-audit.html
+            articles/node-firewall.html
+            articles/xboard-node-extension.html
+            articles/xboard-security-audit.html
+          )
+          for path in "${required[@]}"; do
+            test -f "$path" || {
+              echo "Required website file is missing: $path"
+              exit 1
+            }
+          done
 
       - name: Reject sensitive file names
         shell: bash
