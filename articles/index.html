@@ -33,6 +33,8 @@
   </section>
   <section class="section">
     <div class="container article-list">
+      <article class="article"><h2><a href="/articles/reality-node-blocked/">Reality 节点被墙还是配置错误？失效原因与排查顺序</a></h2><p>当遇到连接失败时，不要直接判定为“Reality节点被墙”。Reality 协议通过模仿合法网站的 TLS 握手特征，极大地降低了被探测的风险，因此失效原因往往更复杂。常见的排查逻辑应从本地网络、参数匹配、目标站可达性以及服务端状态四个维度展开。在复杂的网络环境下，特别是涉及 NAT、移动网络、动态 IP 或多设备共享出口时，简单的连接失败并不等同于节点被封，需要通过多网络交叉验证和人工复核来确认是否存在真正的协议阻断。</p></article>
+      
       <article class="article">
         <h2><a href="/articles/transit-ip-blocked/">中转 IP 被墙怎么办？机场入口、中转和落地线路排查方法</a></h2>
         <p>先分段验证客户端到入口、入口到中转和中转到落地，区分中转 IP 被封、服务异常、路由波动与落地故障。</p>
