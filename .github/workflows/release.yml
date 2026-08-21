@@ -1,0 +1,26 @@
+name: Website Release
+on:
+  push:
+    branches: [main]
+    paths: [index.html, robots.txt, sitemap.xml, 'assets/**', 'articles/**', 'node-firewall/**', 'xboard-security-audit/**', 'xboard-node-extension/**']
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: website-release
+  cancel-in-progress: false
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - run: scripts/build-release.sh dist
+      - name: Create immutable website release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          base="website-${GITHUB_SHA:0:12}"; tag="$base"; n=0
+          while gh release view "$tag" >/dev/null 2>&1; do n=$((n+1)); tag="${base}-r${n}"; done
+          gh release create "$tag" dist/manguolabs-website.tar.gz dist/manguolabs-website.tar.gz.sha256 --target "$GITHUB_SHA" --title "$tag" --notes "Automated public website release for $GITHUB_SHA"

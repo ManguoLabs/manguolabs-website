@@ -1,85 +1,16 @@
 name: Website CI
-
 on:
   pull_request:
-    branches:
-      - main
+    branches: [main]
   push:
-    branches:
-      - main
-
+    branches: [main]
 permissions:
   contents: read
-
-concurrency:
-  group: website-ci-${{ github.ref }}
-  cancel-in-progress: true
-
 jobs:
   validate-static-site:
     name: Validate static website
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
-      - name: Check out source
-        uses: actions/checkout@v4
-
-      - name: Verify approved website files
-        shell: bash
-        run: |
-          set -euo pipefail
-          required=(
-            assets/style.css
-            assets/favicon.svg
-            index.html
-            node-firewall/index.html
-            robots.txt
-            sitemap.xml
-            xboard-node-extension/index.html
-            xboard-security-audit/index.html
-            articles/index.html
-            articles/node-ip-blocked/index.html
-            articles/xboard-free-node-collector/index.html
-            articles/xboard-token-multi-ip/index.html
-          )
-          for path in "${required[@]}"; do
-            test -f "$path" || {
-              echo "Required website file is missing: $path"
-              exit 1
-            }
-          done
-
-      - name: Reject sensitive file names
-        shell: bash
-        run: |
-          set -euo pipefail
-          if find . -type f -not -path './.git/*' \( \
-            -name '.env' -o -name '.env.*' -o -name '*.pem' -o \
-            -name '*.key' -o -name 'id_rsa*' -o -name 'id_ed25519*' -o \
-            -name '*.sql' -o -name '*.sqlite*' \
-          \) -print | grep -q .; then
-            echo "Sensitive file name detected."
-            exit 1
-          fi
-
-      - name: Validate HTML and XML files
-        shell: bash
-        run: |
-          set -euo pipefail
-          python3 - <<'PY'
-          from html.parser import HTMLParser
-          from pathlib import Path
-          import xml.etree.ElementTree as ET
-
-          class StrictEnoughHTMLParser(HTMLParser):
-              def error(self, message):
-                  raise ValueError(message)
-
-          for path in Path(".").rglob("*.html"):
-              parser = StrictEnoughHTMLParser()
-              parser.feed(path.read_text(encoding="utf-8"))
-              parser.close()
-
-          ET.parse("sitemap.xml")
-          print("Validated HTML and sitemap.xml")
-          PY
+      - uses: actions/checkout@v4
+      - run: node scripts/validate-seo.mjs
