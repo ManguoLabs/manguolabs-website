@@ -1,1 +1,98 @@
-<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>机场节点 IP 为什么会频繁失效？先区分入口、中转与落地｜Manguo Labs</title><meta name="description" content="机场节点 IP、中转 IP 或入口 IP 频繁失效时，先明确线路中的入口、中转和落地分别承担什么角色，再判断应该从哪里开始排查。"><meta name="robots" content="index,follow,max-image-preview:large"><link rel="canonical" href="https://manguolabs.com/articles/node-ip-blocked/"><meta property="og:type" content="website"><meta property="og:title" content="机场节点 IP 为什么会频繁失效？先区分入口、中转与落地｜Manguo Labs"><meta property="og:description" content="机场节点 IP、中转 IP 或入口 IP 频繁失效时，先明确线路中的入口、中转和落地分别承担什么角色，再判断应该从哪里开始排查。"><meta property="og:url" content="https://manguolabs.com/articles/node-ip-blocked/"><meta property="og:site_name" content="Manguo Labs"><meta name="theme-color" content="#0b1220"><link rel="icon" href="/assets/favicon.svg"><link rel="stylesheet" href="/assets/style.css"></head><body><header><div class="container nav"><a class="brand" href="/"><span class="logo">M</span><span>Manguo Labs</span></a><nav><a href="/#solutions">解决方案</a><a href="/articles/">技术文章</a><a href="https://t.me/ManguoShop_bot">Telegram</a></nav></div></header><main><section class="page-hero"><div class="container"><span class="eyebrow">技术文章</span><h1>机场节点 IP 为什么会频繁失效？先区分入口、中转与落地</h1><p class="lead">机场节点 IP、中转 IP 或入口 IP 频繁失效时，先明确线路中的入口、中转和落地分别承担什么角色，再判断应该从哪里开始排查。</p></div></section><section><div class="container content-wrap"><article class="content"><h2>先确认到底是哪一段不可用</h2><p>遇到“节点全红”时，第一步不是立刻换所有服务器，而是分别测试入口、中转和落地之间的连通性。只有先定位故障段，后续调整才不会变成反复试错。</p><p>如果确认问题集中在入口到中转这一段，可以继续参考<a class="link" href="/articles/transit-ip-blocked/">中转 IP 被墙后的进一步排查方法</a>。</p><h2>为什么只换 IP 往往不够</h2><p>如果导致问题的暴露方式、入口结构或维护方式没有改变，换新 IP 只能解决当前故障。对于需要长期运营的线路，更重要的是把入口、转发和后端拆分得更容易维护。</p><p><a class="link" href="/node-firewall/">查看线路高可用解决方案 →</a></p></article><aside class="sidebar"><div class="side"><h3>Manguo Labs</h3><p>更多数字产品与技术解决方案。</p><a class="btn primary" href="https://t.me/ManguoShop_bot">进入 Telegram</a><a class="btn" href="/articles/">返回文章列表</a></div></aside></div></section></main><footer><div class="container footer"><div><div class="brand"><span class="logo">M</span><span>Manguo Labs</span></div><p>Digital Products & Technology Solutions</p></div><div><a href="/node-firewall/">线路高可用</a><a href="/xboard-security-audit/">订阅安全审计</a><a href="/xboard-node-extension/">节点扩展与采集</a></div><div><a href="/articles/">技术文章</a><a href="https://t.me/ManguoShop_bot">ManguoShop Bot</a></div></div><div class="container copy">© 2026 Manguo Labs</div></footer></body></html>
+<html lang="zh-CN">
+<head>
+  <meta name="generator" content="HTML Tidy for Mac OS X (vers 31 October 2006 - Apple Inc. build 13670), see www.w3.org">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+
+  <title>机场节点 IP 为什么会频繁失效？先区分入口、中转与落地｜Manguo Labs</title>
+  <meta name="description" content="机场节点 IP、中转 IP 或入口 IP 频繁失效时，先明确线路中的入口、中转和落地分别承担什么角色，再判断应该从哪里开始排查。">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <link rel="canonical" href="https://manguolabs.com/articles/node-ip-blocked/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="机场节点 IP 为什么会频繁失效？先区分入口、中转与落地｜Manguo Labs">
+  <meta property="og:description" content="机场节点 IP、中转 IP 或入口 IP 频繁失效时，先明确线路中的入口、中转和落地分别承担什么角色，再判断应该从哪里开始排查。">
+  <meta property="og:url" content="https://manguolabs.com/articles/node-ip-blocked/">
+  <meta property="og:site_name" content="Manguo Labs">
+  <meta name="theme-color" content="#0b1220">
+  <link rel="icon" href="/assets/favicon.svg">
+  <link rel="stylesheet" href="/assets/style.css" type="text/css">
+</head>
+
+<body>
+  <header>
+    <div class="container nav">
+      <a class="brand" href="/"><span class="logo">M</span><span>Manguo Labs</span></a>
+
+      <nav><a href="/#solutions">解决方案</a><a href="/articles/">技术文章</a><a href="https://t.me/ManguoShop_bot">Telegram</a></nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-hero">
+      <div class="container">
+        <span class="eyebrow">技术文章</span>
+
+        <h1>机场节点 IP 为什么会频繁失效？先区分入口、中转与落地</h1>
+
+        <p class="lead">机场节点 IP、中转 IP 或入口 IP 频繁失效时，先明确线路中的入口、中转和落地分别承担什么角色，再判断应该从哪里开始排查。</p>
+      </div>
+    </section>
+
+    <section>
+      <div class="container content-wrap">
+        <article class="content">
+          <h2>先确认到底是哪一段不可用</h2>
+
+          <p>遇到“节点全红”时，第一步不是立刻换所有服务器，而是分别测试入口、中转和落地之间的连通性。只有先定位故障段，后续调整才不会变成反复试错。</p>
+
+          <p>如果确认问题集中在入口到中转这一段，可以继续参考<a class="link" href="/articles/transit-ip-blocked/">中转 IP 被墙后的进一步排查方法</a>。</p>
+
+          <h2>为什么只换 IP 往往不够</h2>
+
+          <p>如果导致问题的暴露方式、入口结构或维护方式没有改变，换新 IP 只能解决当前故障。对于需要长期运营的线路，更重要的是把入口、转发和后端拆分得更容易维护。</p>
+
+          <h2>什么时候这已经不是单点配置问题</h2>
+
+          <p>如果多个入口或中转频繁失效、换 IP 后短期内再次出现，或当前架构无法独立定位入口、中转和落地责任边界，就不再只是单个节点配置问题。</p>
+
+          <h2>Manguo Labs 能提供什么</h2>
+
+          <p>Manguo Labs 为机场运营者提供<a class="link" href="/node-firewall/">机场高可用入口解决方案</a>，用于梳理入口、中转与落地链路、故障隔离和切换边界；它不替代前面的自助排查，也不作绝对可用性承诺。</p>
+        </article>
+
+        <aside class="sidebar">
+          <div class="side">
+            <h3>Manguo Labs</h3>
+
+            <p>更多数字产品与技术解决方案。</p><a class="btn primary" href="https://t.me/ManguoShop_bot">进入 Telegram</a><a class="btn" href="/articles/">返回文章列表</a>
+          </div>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer">
+      <div>
+        <div class="brand">
+          <span class="logo">M</span><span>Manguo Labs</span>
+        </div>
+
+        <p>Digital Products &amp; Technology Solutions</p>
+      </div>
+
+      <div>
+        <a href="/node-firewall/">线路高可用</a><a href="/xboard-security-audit/">订阅安全审计</a><a href="/xboard-node-extension/">节点扩展与采集</a>
+      </div>
+
+      <div>
+        <a href="/articles/">技术文章</a><a href="https://t.me/ManguoShop_bot">ManguoShop Bot</a>
+      </div>
+    </div>
+
+    <div class="container copy">
+      © 2026 Manguo Labs
+    </div>
+  </footer>
+</body>
+</html>
