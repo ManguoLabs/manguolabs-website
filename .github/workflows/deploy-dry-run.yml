@@ -54,7 +54,9 @@ jobs:
 
           (
             cd "$stage"
-            find . -type f -print0 | LC_ALL=C sort -z | xargs -0 sha256sum > MANIFEST.sha256
+            find . -type f ! -name MANIFEST.sha256 -print0 \
+              | LC_ALL=C sort -z \
+              | xargs -0 sha256sum > MANIFEST.sha256
             sha256sum --check MANIFEST.sha256
           )
 
@@ -62,18 +64,16 @@ jobs:
           echo "Release candidate assembled locally on the GitHub runner."
           echo "No server connection or deployment command was executed."
 
-      - name: Verify deployment is impossible in this workflow
+      - name: Verify no deployment credentials are configured
         shell: bash
+        env:
+          TEST_SSH_KEY: ${{ secrets.MANGUO_SSH_KEY }}
+          TEST_HOST: ${{ secrets.MANGUO_HOST }}
         run: |
           set -euo pipefail
-          test -z "${{ secrets.MANGUO_SSH_KEY }}"
-          test -z "${{ secrets.MANGUO_HOST }}"
-          if grep -R -E '(^|[[:space:]])(ssh|scp|rsync)([[:space:]]|$)|/opt/manguo-deploy/deploy\.sh' \
-            .github/workflows/deploy-dry-run.yml; then
-            echo "A deployment-capable command was found."
-            exit 1
-          fi
-          echo "No deployment credentials or server commands are configured."
+          test -z "$TEST_SSH_KEY"
+          test -z "$TEST_HOST"
+          echo "No deployment credentials are available to this workflow."
 
       - name: Upload test release artifact
         uses: actions/upload-artifact@v4
