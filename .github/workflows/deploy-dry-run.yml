@@ -1,0 +1,84 @@
+name: Deployment Dry Run
+
+on:
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deployment-dry-run-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  build-release-candidate:
+    name: Build release candidate (no deployment)
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Check out reviewed source
+        uses: actions/checkout@v4
+
+      - name: Assemble isolated release candidate
+        shell: bash
+        run: |
+          set -euo pipefail
+          stage="$RUNNER_TEMP/manguolabs-release"
+          mkdir -p "$stage/assets" "$stage/articles/node-ip-blocked" \
+            "$stage/articles/xboard-free-node-collector" \
+            "$stage/articles/xboard-token-multi-ip" \
+            "$stage/node-firewall" "$stage/xboard-node-extension" \
+            "$stage/xboard-security-audit"
+
+          files=(
+            assets/style.css
+            assets/favicon.svg
+            index.html
+            node-firewall/index.html
+            robots.txt
+            sitemap.xml
+            xboard-node-extension/index.html
+            xboard-security-audit/index.html
+            articles/index.html
+            articles/node-ip-blocked/index.html
+            articles/xboard-free-node-collector/index.html
+            articles/xboard-token-multi-ip/index.html
+          )
+
+          for path in "${files[@]}"; do
+            test -f "$path"
+            cp --parents "$path" "$stage"
+          done
+
+          (
+            cd "$stage"
+            find . -type f ! -name MANIFEST.sha256 -print0 \
+              | LC_ALL=C sort -z \
+              | xargs -0 sha256sum > MANIFEST.sha256
+            sha256sum --check MANIFEST.sha256
+          )
+
+          tar -C "$stage" -czf "$RUNNER_TEMP/manguolabs-release.tar.gz" .
+          echo "Release candidate assembled locally on the GitHub runner."
+          echo "No server connection or deployment command was executed."
+
+      - name: Verify no deployment credentials are configured
+        shell: bash
+        env:
+          TEST_SSH_KEY: ${{ secrets.MANGUO_SSH_KEY }}
+          TEST_HOST: ${{ secrets.MANGUO_HOST }}
+        run: |
+          set -euo pipefail
+          test -z "$TEST_SSH_KEY"
+          test -z "$TEST_HOST"
+          echo "No deployment credentials are available to this workflow."
+
+      - name: Upload test release artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: manguolabs-release-dry-run
+          path: ${{ runner.temp }}/manguolabs-release.tar.gz
+          if-no-files-found: error
+          retention-days: 1
