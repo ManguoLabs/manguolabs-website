@@ -1,5 +1,5 @@
-<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Reality 节点被墙还是配置错误？失效原因与排查顺序｜Manguo Labs</title><meta name="description" content="Reality节点失效时，切勿盲目判定为被墙。本文提供科学排查建议，涵盖配置校验、目标站检测及多网络出口验证，助您区分网络封锁与客户端错误。"><meta name="robots" content="index,follow,max-image-preview:large"><link rel="canonical" href="https://manguolabs.com/articles/reality-node-blocked/"><meta property="og:type" content="article"><meta property="og:title" content="Reality 节点被墙还是配置错误？失效原因与排查顺序｜Manguo Labs"><meta property="og:description" content="Reality节点失效时，切勿盲目判定为被墙。本文提供科学排查建议，涵盖配置校验、目标站检测及多网络出口验证，助您区分网络封锁与客户端错误。"><meta property="og:url" content="https://manguolabs.com/articles/reality-node-blocked/"><meta property="og:site_name" content="Manguo Labs"><meta name="theme-color" content="#111827"><link rel="icon" href="/assets/favicon.svg"><link rel="stylesheet" href="/assets/style.css"><meta name="manguo-canonical-intent" content="protocol-node-blocked-reality"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Reality 节点被墙还是配置错误？失效原因与排查顺序","description":"Reality节点失效时，切勿盲目判定为被墙。本文提供科学排查建议，涵盖配置校验、目标站检测及多网络出口验证，助您区分网络封锁与客户端错误。","author":{"@type":"Organization","name":"Manguo Labs Research"},"publisher":{"@type":"Organization","name":"Manguo Labs","url":"https://manguolabs.com/"},"datePublished":"2026-08-20T00:00:00+08:00","dateModified":"2026-08-20T00:00:00+08:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://manguolabs.com/articles/reality-node-blocked/"},"url":"https://manguolabs.com/articles/reality-node-blocked/","keywords":"Network, Reliability"}</script></head><body><header class="site-header"><div class="container nav"><a class="brand" href="/" aria-label="Manguo Labs home"><span class="logo" aria-hidden="true">M</span><span>Manguo Labs</span></a><input class="nav-toggle" type="checkbox" id="nav-toggle"><label class="menu-button" for="nav-toggle"><span></span><span></span><span></span><b>Menu</b></label><nav aria-label="Primary"><a href="/#solutions">Solutions</a><a href="/articles/">Research</a><a href="/node-firewall/">Infrastructure</a><a class="nav-cta" href="https://t.me/ManguoShop_bot">Talk to us</a></nav></div></header><main><section class="article-hero"><div class="narrow"><p class="breadcrumb"><a href="/articles/">Research</a><span>/</span>Infrastructure</p><h1>Reality 节点被墙还是配置错误？失效原因与排查顺序</h1><p class="lead">当遇到连接失败时，不要直接判定为“Reality节点被墙”。Reality 失效可能来自本地网络、参数不匹配、目标站不可达、服务端异常或链路阻断，应先对照握手日志，再用不同网络交叉验证，确认故障发生在客户端、入口、中转还是落地。</p><div class="article-meta"><span>Infrastructure</span><i></i><span>Manguo Labs Research</span><i></i><time datetime="2026-08-20">2026-08-20</time><i></i><span>5 min read</span></div><div class="article-tags"><span>Network</span><span>Reliability</span></div></div></section><section class="article-shell"><div class="article-grid"><aside class="toc"><p>On this page</p><ol><li><a href="#section-1">判定“Reality节点被墙”的科学流程</a></li><li><a href="#section-2">常见症状与错误区分</a></li><li><a href="#section-3">配置错误与网络封锁的界限</a></li><li><a href="#section-4">多网络验证与出口策略排查</a></li><li><a href="#section-5">针对 Reality 失效的手动复核建议</a></li><li><a href="#section-6">什么时候这已经不是单点配置问题</a></li><li><a href="#section-7">Manguo Labs 能提供什么</a></li><li><a href="#section-8">常见问题</a></li><li><a href="#section-9">总结与下一步</a></li></ol></aside><article class="prose article-prose">
-          <h2 id="section-1">判定“Reality节点被墙”的科学流程</h2>
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Reality 节点被墙还是配置错误？失效原因与排查顺序｜Manguo Labs</title><meta name="description" content="Reality节点失效时，切勿盲目判定为被墙。本文提供科学排查建议，涵盖配置校验、目标站检测及多网络出口验证，助您区分网络封锁与客户端错误。"><meta name="robots" content="index,follow,max-image-preview:large"><link rel="canonical" href="https://manguolabs.com/articles/reality-node-blocked/"><meta property="og:type" content="article"><meta property="og:title" content="Reality 节点被墙还是配置错误？失效原因与排查顺序｜Manguo Labs"><meta property="og:description" content="Reality节点失效时，切勿盲目判定为被墙。本文提供科学排查建议，涵盖配置校验、目标站检测及多网络出口验证，助您区分网络封锁与客户端错误。"><meta property="og:url" content="https://manguolabs.com/articles/reality-node-blocked/"><meta property="og:site_name" content="Manguo Labs"><meta name="theme-color" content="#111827"><link rel="icon" href="/assets/favicon.svg"><link rel="stylesheet" href="/assets/style.css"><meta name="manguo-canonical-intent" content="protocol-node-blocked-reality"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Reality 节点被墙还是配置错误？失效原因与排查顺序","description":"Reality节点失效时，切勿盲目判定为被墙。本文提供科学排查建议，涵盖配置校验、目标站检测及多网络出口验证，助您区分网络封锁与客户端错误。","author":{"@type":"Organization","name":"Manguo Labs Research"},"publisher":{"@type":"Organization","name":"Manguo Labs","url":"https://manguolabs.com/"},"datePublished":"2026-08-20T00:00:00+08:00","dateModified":"2026-08-20T00:00:00+08:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://manguolabs.com/articles/reality-node-blocked/"},"url":"https://manguolabs.com/articles/reality-node-blocked/","keywords":"Network, Reliability"}</script></head><body><header class="site-header"><div class="container nav"><a class="brand" href="/" aria-label="Manguo Labs 首页"><span class="logo" aria-hidden="true">M</span><span>Manguo Labs</span></a><input class="nav-toggle" type="checkbox" id="nav-toggle"><label class="menu-button" for="nav-toggle" role="button" tabindex="0" aria-label="打开导航菜单" aria-controls="primary-navigation" aria-expanded="false"><span></span><span></span><span></span></label><nav id="primary-navigation" aria-label="主导航"><a href="/#solutions">解决方案</a><a href="/articles/">技术研究</a><a href="/node-firewall/">基础设施</a><a class="nav-cta" href="https://t.me/ManguoShop_bot">联系我们</a></nav></div></header><main><section class="article-hero"><div class="narrow"><p class="breadcrumb"><a href="/articles/">技术研究</a><span>/</span>基础设施</p><h1>Reality 节点被墙还是配置错误？失效原因与排查顺序</h1><p class="lead">当遇到连接失败时，不要直接判定为“Reality节点被墙”。Reality 失效可能来自本地网络、参数不匹配、目标站不可达、服务端异常或链路阻断，应先对照握手日志，再用不同网络交叉验证，确认故障发生在客户端、入口、中转还是落地。</p><div class="article-meta"><span>基础设施</span><i></i><span>Manguo Labs Research</span><i></i><time datetime="2026-08-20">2026年8月20日</time><i></i><span>预计阅读 5 分钟</span></div><div class="article-tags"><span>网络架构</span><span>可靠性</span></div></div></section><section class="article-shell"><div class="article-grid"><aside class="toc"><p>本文目录</p><ol><li><a href="#section-1">判定“Reality节点被墙”的科学流程</a></li><li><a href="#section-2">常见症状与错误区分</a></li><li><a href="#section-3">配置错误与网络封锁的界限</a></li><li><a href="#section-4">多网络验证与出口策略排查</a></li><li><a href="#section-5">针对 Reality 失效的手动复核建议</a></li><li><a href="#section-6">什么时候这已经不是单点配置问题</a></li><li><a href="#section-7">Manguo Labs 能提供什么</a></li><li><a href="#section-8">常见问题</a></li><li><a href="#section-9">总结与下一步</a></li></ol></aside><article class="prose article-prose">
+          <h2 id="section-1" id="section-1">判定“Reality节点被墙”的科学流程</h2>
 
           <p>第一步应进行基础连通性测试。使用简单的 ping 或 tcping 检查服务器 IP 是否可达。如果 IP 能通但 Reality 无法握手，则重点转向配置校验。如果 IP 完全无法访问，应尝试通过不同的网络环境测试，例如切换至 4G/5G 移动网络或不同省份的 ISP 线路。</p>
 
@@ -7,7 +7,7 @@
 
           <p>第三步是时间同步。Reality 握手对服务端与客户端的时间差有严格要求，通常允许误差在 30 秒以内。若设备在旅行途中由于时区自动切换导致系统时间偏离，会导致 Reality 节点失效，这属于典型的配置与环境冲突，而非网络封锁。</p>
 
-          <h2 id="section-2">常见症状与错误区分</h2>
+          <h2 id="section-2" id="section-2">常见症状与错误区分</h2>
 
           <p>当出现 Reality 节点失效时，客户端日志通常会提供线索。如果是 'connection refused'，多半是服务端进程未运行或端口映射错误。如果是 'i/o timeout'，则可能是网络链路阻断、中转 IP 被墙或目标站握手超时。</p>
 
@@ -15,13 +15,13 @@
 
           <p>在移动网络或公共 WiFi 环境下，如果只在某一种接入网络出现握手超时，而切换到另一运营商后恢复，应先检查 MTU、透明代理、防火墙和出口链路稳定性。这个对照结果只能帮助缩小故障段，不能单独证明服务器 IP 已被阻断。</p>
 
-          <h2 id="section-3">配置错误与网络封锁的界限</h2>
+          <h2 id="section-3" id="section-3">配置错误与网络封锁的界限</h2>
 
           <p>Reality 协议的核心在于偷取合法站点的 TLS 特征。如果你发现 Reality 节点被封，首先检查你所伪装的目标站是否包含在 GFW 黑名单中。如果目标站本身在境内无法直接访问，那么基于该站点的 Reality 流量也将面临同样的审计压力。</p>
 
           <p>此外，服务端配置中的 Xver（Proxy Protocol）开关必须与前端负载均衡器保持一致。如果中间环节存在 Reality 中转被墙的情况，可能是中转机到落地机之间的加密流量特征被识别。在排查过程中，应当直接测试落地机端口，排除中转环节的干扰。</p>
 
-          <h2 id="section-4">多网络验证与出口策略排查</h2>
+          <h2 id="section-4" id="section-4">多网络验证与出口策略排查</h2>
 
           <p>由于国内不同省份、不同运营商（电信、联通、移动）的跨境网关策略存在差异，单一地点的测试结果不能代表全局。利用多地域测速工具验证 Reality 中转 IP 被墙的覆盖范围至关重要。</p>
 
@@ -29,7 +29,7 @@
 
           <p>针对高要求场景，建议部署多个不同子网的入口镜像。当主入口疑似被墙时，通过切换备用入口观察握手行为，可以快速定位是协议特征暴露还是特定 IP 被针对性阻隔。</p>
 
-          <h2 id="section-5">针对 Reality 失效的手动复核建议</h2>
+          <h2 id="section-5" id="section-5">针对 Reality 失效的手动复核建议</h2>
 
           <p>手动排查建议如下：首先，在服务端使用 curl 测试 Dest 目标站是否能正常返回内容。其次，检查证书有效期及 SNI 配置是否在配置文件中拼写准确。最后，利用日志工具查看是否存在大量来自特定地区 IP 的探测请求，这有助于判断是否受到了主动探测攻击。</p>
 
@@ -37,15 +37,15 @@
 
           <p>为了维持节点的可维护性，应记录 ShortID、PublicKey、SNI、目标站和客户端版本的变更，避免参数漂移被误判为链路封锁。配置调整应基于日志与交叉测试证据，不应作绝对可用性承诺。</p>
 
-          <h2 id="section-6">什么时候这已经不是单点配置问题</h2>
+          <h2 id="section-6" id="section-6">什么时候这已经不是单点配置问题</h2>
 
           <p>如果已经排除配置错误、DNS、SNI、TLS、目标站状态与客户端兼容问题，但多个入口、中转或落地仍频繁失效，或者换 IP 后短时间内反复出现，就应从整条链路的故障隔离与切换能力评估，而不是继续盲目改协议参数。</p>
 
-          <h2 id="section-7">Manguo Labs 能提供什么</h2>
+          <h2 id="section-7" id="section-7">Manguo Labs 能提供什么</h2>
 
           <p>Manguo Labs 为机场运营者提供<a class="link" href="/node-firewall/">机场高可用入口解决方案</a>，适用于入口、中转与落地反复失效、需要明确责任边界和切换方案的场景。该服务建立在前述自助排查之后，不替代正确配置，也不作绝对防封承诺。</p>
 
-          <h2 id="section-8">常见问题</h2>
+          <h2 id="section-8" id="section-8">常见问题</h2>
 
           <div class="faq">
             <h3>Reality 节点被墙的典型表现是什么？</h3>
@@ -71,9 +71,9 @@
             <p>是的。如果目标站不支持 TLS 1.3、证书链不完整，或者其服务器位于被阻断的地区，Reality 节点将无法成功代理证书握手，导致客户端出现连接失败。</p>
           </div>
 
-          <h2 id="section-9">总结与下一步</h2>
+          <h2 id="section-9" id="section-9">总结与下一步</h2>
 
           <p>排查 Reality 节点失效时，应按“网络连通性 &gt; 配置参数 &gt; 目标站状态 &gt; 入口/中转/落地分层 &gt; 多网络验证”的顺序进行，根据日志和对照测试判断故障段，避免盲目换 IP。还可继续阅读<a class="link" href="/articles/node-ip-blocked/">机场节点 IP 排查</a>与<a class="link" href="/articles/transit-ip-blocked/">中转 IP 排查</a>。</p>
 
           <p>需要进一步评估时，可先查看<a class="link" href="/node-firewall/">线路高可用方案</a>，并参考<a class="link" href="/articles/">更多技术文章</a>。</p>
-        <div class="author-card"><span class="logo">M</span><div><strong>Manguo Labs Research</strong><p>Independent technical notes on infrastructure, security, and automation.</p></div></div><section class="continue"><p class="eyebrow">Continue reading</p><a href="/articles/">Explore all technical research <span>→</span></a></section></article></div></section></main><footer class="site-footer"><div class="container footer-grid"><div><a class="brand" href="/"><span class="logo">M</span><span>Manguo Labs</span></a><p>Infrastructure · Security · Automation</p><p class="footer-note">Technical systems for operators who need evidence, durable architecture, and practical boundaries.</p></div><div><h2>Solutions</h2><a href="/node-firewall/">Infrastructure</a><a href="/xboard-security-audit/">Security audit</a><a href="/xboard-node-extension/">Automation</a></div><div><h2>Research</h2><a href="/articles/">Technical research</a><a href="https://t.me/ManguoShop_bot">ManguoShop Bot</a></div></div><div class="container copy">© 2026 Manguo Labs. Built for reliable operations.</div></footer><script src="/assets/site.js" defer></script></body></html>
+        <div class="author-card"><span class="logo">M</span><div><strong>Manguo Labs Research</strong><p>Independent technical notes on infrastructure, security, and automation.</p></div></div><section class="continue"><p class="eyebrow">Continue reading</p><a href="/articles/">Explore all technical research <span>→</span></a></section><div class="author-card"><span class="logo">M</span><div><strong>Manguo Labs Research</strong><p>独立的基础设施、安全审计与自动化技术笔记。</p></div></div><section class="continue"><p class="eyebrow">继续阅读</p><a href="/articles/">浏览全部技术文章 <span>→</span></a></section></article></div></section></main><footer class="site-footer"><div class="container footer-grid"><div><a class="brand" href="/"><span class="logo">M</span><span>Manguo Labs</span></a><p>基础设施 · 安全审计 · 自动化</p><p class="footer-note">以证据、可靠架构与清晰边界，帮助技术系统长期稳定运行。</p></div><div><h2>解决方案</h2><a href="/node-firewall/">高可用入口</a><a href="/xboard-security-audit/">XBoard 安全审计</a><a href="/xboard-node-extension/">节点扩展与采集</a></div><div><h2>技术研究</h2><a href="/articles/">全部文章</a><a href="https://t.me/ManguoShop_bot">ManguoShop Bot</a><a href="https://t.me/ManguoShop_bot">联系我们</a></div></div><div class="container copy">© 2026 Manguo Labs · 为可靠运行而构建</div></footer><script src="/assets/site.js" defer></script></body></html>
