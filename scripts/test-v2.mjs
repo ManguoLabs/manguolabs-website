@@ -34,6 +34,8 @@ for(const p of ['index.html','articles/index.html','node-firewall/index.html']){
   assert.ok(!html.includes('class="nav-toggle"'),`${p}: no checkbox-only menu`);
 }
 assert.match(read('index.html'),/<h1><span>为复杂的技术运营问题，<\/span><em>构建可靠、可验证的解决方案。<\/em><\/h1>/,'intentional hero emphasis unit');
+assert.match(read('index.html'),/\/assets\/style\.css\?v=v2-1-1/,'versioned stylesheet URL');
+assert.match(read('index.html'),/\/assets\/site\.js\?v=v2-1-1/,'versioned script URL');
 assert.match(read('assets/site.js'),/document\.body\.classList\.toggle\('nav-open'/,'mobile menu scroll lock');
 assert.match(read('assets/style.css'),/body\.nav-open\{overflow:hidden\}/,'mobile navigation layer CSS');
 console.log(`V2.1 deterministic tests passed: ${articles.length} immutable articles`);
