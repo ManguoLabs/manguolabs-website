@@ -15,3 +15,4 @@ jobs:
       - uses: actions/checkout@v4
       - run: node scripts/check-contact-routing.mjs .
       - run: node scripts/validate-seo.mjs
+      - run: node scripts/test-github-markdown.mjs
