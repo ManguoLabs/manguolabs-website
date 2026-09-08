@@ -25,6 +25,7 @@
 - [一个 XBoard Token 同时出现多个 IP，一定是订阅共享吗？](./xboard-token-multi-ip/) — Token多IP、一个Token多个IP、XBoard Token多IP、订阅共享、真实连接IP
 - [怎么判断订阅被多人共享：Token、IP、连接证据与误判边界 | Manguo Labs](./seed-security-1ol23ta/) — 怎么判断订阅被多人共享、订阅共享检测、Token 多 IP 关联、XBoard 安全审计、订阅异常行为分析
 - [怎么抓内鬼：XBoard 订阅共享与 Token 泄漏的完整证据链与审计方案](./seed-security-au6z9d/) — 怎么抓内鬼、XBoard 订阅共享检测、Token 多 IP 关联分析、账号安全审计
+- [Soga 连接 IP 怎么辅助调查订阅共享与账号关联 | XBoard 安全审计](./seed-security-1ihm58b/) — Soga连接IP怎么辅助调查、Soga 真实连接 IP、订阅 Token 多 IP、XBoard 账号关联调查、订阅共享审计
 - [Token泄露怎么定位：XBoard订阅Token多IP、账号关联与审计方案](./seed-security-u8yjsb/) — Token泄露怎么定位、订阅Token多IP、XBoard账号关联、订阅共享审计
 - [XBoard 节点池怎么管理？多订阅同步、去重与健康检查指南](./xboard-node-pool/) — XBoard节点池、第三方节点池、XBoard多订阅、XBoard节点同步、XBoard节点自动同步
 - [XBoard 免费节点怎么自动采集并扩展到用户订阅？](./xboard-free-node-collector/) — XBoard免费节点采集、免费节点采集、XBoard节点采集、XBoard节点扩展、XBoard权限组节点
