@@ -23,6 +23,7 @@
 
 - [登录IP和订阅IP怎么关联？XBoard 账号共享与多 IP 证据链审计方法](./seed-security-1p88fd/) — 登录IP和订阅IP怎么关联、订阅IP和登录IP不一致、Token多IP关联分析、XBoard账号共享检测、订阅安全审计系统
 - [多Token同IP怎么查：XBoard订阅共享与账号关联的审计逻辑](./seed-security-1n8l6a0/) — 多Token同IP怎么查、订阅Token同IP检测、XBoard多账号同IP、Token关联IP追踪
+- [内鬼调查误判怎么避免：从异常现象到证据链的完整排查思路](./seed-security-jjncfd/) — 内鬼调查误判怎么避免、Token多IP排查、订阅共享判断、账号关联分析
 - [一个 XBoard Token 同时出现多个 IP，一定是订阅共享吗？](./xboard-token-multi-ip/) — Token多IP、一个Token多个IP、XBoard Token多IP、订阅共享、真实连接IP
 - [怎么判断订阅被多人共享：Token、IP、连接证据与误判边界 | Manguo Labs](./seed-security-1ol23ta/) — 怎么判断订阅被多人共享、订阅共享检测、Token 多 IP 关联、XBoard 安全审计、订阅异常行为分析
 - [怎么抓内鬼：XBoard 订阅共享与 Token 泄漏的完整证据链与审计方案](./seed-security-au6z9d/) — 怎么抓内鬼、XBoard 订阅共享检测、Token 多 IP 关联分析、账号安全审计
