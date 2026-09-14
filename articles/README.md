@@ -20,6 +20,7 @@
 - [IP被墙后怎么处理？节点阻断分层排查与高可用架构方案](./seed-availability-1o2n02u/) — IP被墙后怎么处理、IP被封排查、节点阻断定位、机场入口高可用
 - [Reality 和 VLESS 哪个稳定？协议选择与节点高可用排查](./seed-availability-2lrs09/) — Reality和VLESS哪个稳定、VLESS Reality 稳定性对比、机场节点协议选择、Reality 协议封锁排查、VLESS TLS 节点失效
 - [Reality 节点被墙还是配置错误？失效原因与排查顺序](./reality-node-blocked/) — Reality节点被墙、Reality节点被封、Reality节点失效、Reality节点频繁被墙、VLESS Reality节点被墙
+- [Trojan和VLESS怎么选：先看失效现象再谈协议差异](./seed-availability-14rtqjr/) — Trojan和VLESS怎么选、Trojan VLESS 区别、协议选择 高可用、节点频繁失效 协议排查、VLESS 还是 Trojan 稳定
 
 ## XBoard 订阅安全
 
