@@ -17,6 +17,7 @@
 - [怎么降低入口被墙概率：从现象判断到高可用架构](./seed-availability-1sxmi2j/) — 怎么降低入口被墙概率、入口被墙判断、机场入口高可用、入口切换方案、入口封锁排查
 - [中转 IP 被墙怎么办？机场入口、中转和落地线路排查方法](./transit-ip-blocked/) — 中转IP被墙怎么办、机场中转IP被墙、中转IP被封、中转机被墙、机场中转失效
 - [中转被墙怎么排查：入口、中转、落地分层定位与高可用方案](./seed-availability-1jam6dr/) — 中转被墙怎么排查、中转节点被墙、中转失效排查、入口中转落地故障定位
+- [AnyTLS适合什么场景？协议特性与入口链路排障指南](./seed-availability-q04rnn/) — AnyTLS适合什么场景、AnyTLS使用场景、AnyTLS和Trojan区别、AnyTLS客户端配置、AnyTLS连接不上排查
 - [Hysteria2 稳定吗？频繁断线与入口失效的分层排查与高可用方案](./seed-availability-9a6458/) — Hysteria2稳定吗、Hysteria2 频繁断线、Hysteria2 连接不稳定、Hysteria2 入口失效、Hysteria2 高可用方案
 - [IP被墙后怎么处理？节点阻断分层排查与高可用架构方案](./seed-availability-1o2n02u/) — IP被墙后怎么处理、IP被封排查、节点阻断定位、机场入口高可用
 - [Reality 和 VLESS 哪个稳定？协议选择与节点高可用排查](./seed-availability-2lrs09/) — Reality和VLESS哪个稳定、VLESS Reality 稳定性对比、机场节点协议选择、Reality 协议封锁排查、VLESS TLS 节点失效
