@@ -9,6 +9,7 @@ const SKIP_DIRECTORIES = new Set(['.git', 'node_modules', 'dist', 'build', 'cove
 const LEGAL_FILE = /^(license|copying|notice)(\.|$)/i;
 const TECHNICAL_HOST = /^(?:[^.]+\.)?(?:github\.com|githubusercontent\.com|openai\.com|google\.com|schema\.org|w3\.org|npmjs\.com|nodejs\.org)$/i;
 const CONTACT_CONTEXT = /telegram|discord|wechat|微信|qq群|qq\s*[:：群号]|交流群|作者群|社群|捐赠|赞助|donat(?:e|ion)|sponsor|buy[ -]?me[ -]?a[ -]?coffee|商业咨询|购买地址|售后|support|contact/i;
+const URL_PATTERN = /https?:\/\/[^\s<>)\]"'）】》〉」』〕〗〙〛，、；：！？。]+/giu;
 
 const roots = process.argv.slice(2).length ? process.argv.slice(2) : ['.'];
 const failures = [];
@@ -26,7 +27,7 @@ function inspect(file, root) {
       failures.push(`${location}: Discord invite`);
     }
     if (CONTACT_CONTEXT.test(line)) {
-      const links = line.match(/https?:\/\/[^\s<>)\]"']+/gi) || [];
+      const links = (line.match(URL_PATTERN) || []).map(link => link.replace(/[.,;:!?]+$/g, ''));
       for (const link of links) {
         try {
           const host = new URL(link).hostname;
