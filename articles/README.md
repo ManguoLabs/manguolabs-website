@@ -47,6 +47,7 @@
 
 ## XBoard 节点与订阅管理
 
+- [节点池怎么去重：从手工比对到自动化采集的完整思路](./seed-node-extension-1a8w7kq/) — 节点池怎么去重、多来源节点合并、节点重复检测、Clash YAML 节点整理、XBoard 节点采集
 - [XBoard 第三方节点接入指南：格式解析、去重清洗与权限控制](./xboard-third-party-nodes/) — XBoard第三方节点、XBoard节点扩展、XBoard外部节点、XBoard增加节点
 
 ## 获取完整方案 / 咨询
