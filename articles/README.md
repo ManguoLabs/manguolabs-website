@@ -48,6 +48,7 @@
 
 ## XBoard 节点与订阅管理
 
+- [多订阅怎么同步节点：手工合并的坑与自动化思路](./seed-node-extension-r1z6g8/) — 多订阅怎么同步节点、多个订阅节点合并、第三方节点接入 XBoard、Clash YAML 节点同步、节点池自动更新
 - [节点池怎么去重：从手工比对到自动化采集的完整思路](./seed-node-extension-1a8w7kq/) — 节点池怎么去重、多来源节点合并、节点重复检测、Clash YAML 节点整理、XBoard 节点采集
 - [节点池怎么做健康检查？从手工测速到自动化维护的完整思路](./seed-node-extension-1h9crmf/) — 节点池怎么做健康检查、节点存活检测、机场节点自动剔除、订阅节点健康检查脚本、多来源节点维护
 - [XBoard 第三方节点接入指南：格式解析、去重清洗与权限控制](./xboard-third-party-nodes/) — XBoard第三方节点、XBoard节点扩展、XBoard外部节点、XBoard增加节点
