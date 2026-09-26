@@ -30,6 +30,7 @@
 ## XBoard 订阅安全
 
 - [登录IP和订阅IP怎么关联？XBoard 账号共享与多 IP 证据链审计方法](./seed-security-1p88fd/) — 登录IP和订阅IP怎么关联、订阅IP和登录IP不一致、Token多IP关联分析、XBoard账号共享检测、订阅安全审计系统
+- [第三方节点怎么导入 XBoard：格式解析、命名、权限与持续同步](./seed-node-extension-1783hd1/) — 第三方节点怎么导入、XBoard 导入第三方订阅、Clash YAML 节点导入、节点去重与自动命名、节点权限组与套餐
 - [多Token同IP怎么查：XBoard订阅共享与账号关联的审计逻辑](./seed-security-1n8l6a0/) — 多Token同IP怎么查、订阅Token同IP检测、XBoard多账号同IP、Token关联IP追踪
 - [节点池怎么自动更新：从手工维护到自动采集的完整思路](./seed-node-extension-kkpqek/) — 节点池怎么自动更新、XBoard 节点自动采集、第三方订阅自动同步、Clash YAML 自动导入节点
 - [节点失效怎么自动剔除？XBoard 节点健康检测与自动清理方法](./seed-node-extension-1kn15f5/) — 节点失效怎么自动剔除、XBoard 节点健康检测、第三方节点自动剔除、订阅节点自动检测失效、Clash YAML 节点维护
