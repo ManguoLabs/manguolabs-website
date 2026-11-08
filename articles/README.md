@@ -72,6 +72,7 @@
 - [第三方节点怎么导入 XBoard：格式解析、命名、权限与持续同步](./seed-node-extension-1783hd1/) — 第三方节点怎么导入、XBoard 导入第三方订阅、Clash YAML 节点导入、节点去重与自动命名、节点权限组与套餐
 - [多源节点怎么合并：XBoard 多订阅、API 与 Clash YAML 统一处理思路](./seed-node-extension-1lfrkfa/) — 多源节点怎么合并、XBoard 多订阅合并、Clash YAML 节点合并去重、节点地区识别与自动命名、节点池缓存与动态注入
 - [多Token同IP怎么查：XBoard订阅共享与账号关联的审计逻辑](./seed-security-1n8l6a0/) — 多Token同IP怎么查、订阅Token同IP检测、XBoard多账号同IP、Token关联IP追踪
+- [机场有内鬼怎么办？XBoard 订阅泄露的取证、判断与处置思路](./seed-security-7s4emc/) — 内鬼怎么办、XBoard 订阅共享排查、Token 多 IP 判断、可疑账号关联追踪、订阅泄露取证
 - [节点池怎么自动更新：从手工维护到自动采集的完整思路](./seed-node-extension-kkpqek/) — 节点池怎么自动更新、XBoard 节点自动采集、第三方订阅自动同步、Clash YAML 自动导入节点
 - [节点失效怎么自动剔除？XBoard 节点健康检测与自动清理方法](./seed-node-extension-1kn15f5/) — 节点失效怎么自动剔除、XBoard 节点健康检测、第三方节点自动剔除、订阅节点自动检测失效、Clash YAML 节点维护
 - [内鬼调查误判怎么避免：从异常现象到证据链的完整排查思路](./seed-security-jjncfd/) — 内鬼调查误判怎么避免、Token多IP排查、订阅共享判断、账号关联分析
