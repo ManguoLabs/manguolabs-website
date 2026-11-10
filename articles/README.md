@@ -76,6 +76,7 @@
 - [节点池怎么自动更新：从手工维护到自动采集的完整思路](./seed-node-extension-kkpqek/) — 节点池怎么自动更新、XBoard 节点自动采集、第三方订阅自动同步、Clash YAML 自动导入节点
 - [节点失效怎么自动剔除？XBoard 节点健康检测与自动清理方法](./seed-node-extension-1kn15f5/) — 节点失效怎么自动剔除、XBoard 节点健康检测、第三方节点自动剔除、订阅节点自动检测失效、Clash YAML 节点维护
 - [内鬼调查误判怎么避免：从异常现象到证据链的完整排查思路](./seed-security-jjncfd/) — 内鬼调查误判怎么避免、Token多IP排查、订阅共享判断、账号关联分析
+- [内鬼如何解决：XBoard 订阅泄露的证据链排查与人工复核思路](./seed-security-143c8g3/) — 内鬼如何解决、XBoard 订阅泄露排查、Token 多 IP 审计、账号关联追踪、订阅共享风险复核
 - [内鬼如何排查：XBoard 订阅泄露的证据链与人工复核方法](./seed-security-1affayo/) — 内鬼如何排查、XBoard 订阅泄露排查、Token 多 IP 分析、账号关联追踪、订阅共享审计
 - [内鬼为什么难抓？XBoard 订阅泄露的证据链与复核思路](./seed-security-1intywy/) — 内鬼为什么
 - [一个 XBoard Token 同时出现多个 IP，一定是订阅共享吗？](./xboard-token-multi-ip/) — Token多IP、一个Token多个IP、XBoard Token多IP、订阅共享、真实连接IP
