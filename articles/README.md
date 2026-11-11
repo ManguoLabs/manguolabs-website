@@ -87,6 +87,7 @@
 - [Token泄露怎么定位：XBoard订阅Token多IP、账号关联与审计方案](./seed-security-u8yjsb/) — Token泄露怎么定位、订阅Token多IP、XBoard账号关联、订阅共享审计
 - [XBoard 节点池怎么管理？多订阅同步、去重与健康检查指南](./xboard-node-pool/) — XBoard节点池、第三方节点池、XBoard多订阅、XBoard节点同步、XBoard节点自动同步
 - [XBoard 免费节点怎么自动采集并扩展到用户订阅？](./xboard-free-node-collector/) — XBoard免费节点采集、免费节点采集、XBoard节点采集、XBoard节点扩展、XBoard权限组节点
+- [XBoard 内鬼误判怎么避免：多维证据与人工复核思路](./seed-security-mxrlrz/) — 内鬼误判、XBoard 订阅共享判断、Token 多 IP 误判、同 IP 多 Token、账号关联追踪
 - [XBoard 怎么查内鬼？从 Token、IP 与连接记录建立证据链](./xboard-insider-investigation/) — XBoard、Evidence
 - [XBoard导入Clash订阅：节点字段映射与失败排查完全指南](./xboard-clash-import/) — XBoard导入Clash订阅、XBoard Clash订阅、XBoard导入Clash节点、XBoard Clash节点、Clash订阅怎么接入XBoard
 - [XBoard订阅共享检测与多维审计：从日志排查到误判边界控制](./xboard-subscription-sharing/) — XBoard订阅共享检测、订阅共享、XBoard订阅共享、机场订阅共享、机场账号共享检测
