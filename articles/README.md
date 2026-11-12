@@ -70,6 +70,7 @@
 
 - [登录IP和订阅IP怎么关联？XBoard 账号共享与多 IP 证据链审计方法](./seed-security-1p88fd/) — 登录IP和订阅IP怎么关联、订阅IP和登录IP不一致、Token多IP关联分析、XBoard账号共享检测、订阅安全审计系统
 - [第三方节点怎么导入 XBoard：格式解析、命名、权限与持续同步](./seed-node-extension-1783hd1/) — 第三方节点怎么导入、XBoard 导入第三方订阅、Clash YAML 节点导入、节点去重与自动命名、节点权限组与套餐
+- [订阅泄露怎么办？XBoard 运营者的证据排查与处置步骤](./seed-security-1r65a9y/) — 订阅泄露怎么办、XBoard 订阅 Token 重置、Token 多 IP 判断、订阅共享排查、订阅安全审计
 - [多源节点怎么合并：XBoard 多订阅、API 与 Clash YAML 统一处理思路](./seed-node-extension-1lfrkfa/) — 多源节点怎么合并、XBoard 多订阅合并、Clash YAML 节点合并去重、节点地区识别与自动命名、节点池缓存与动态注入
 - [多Token同IP怎么查：XBoard订阅共享与账号关联的审计逻辑](./seed-security-1n8l6a0/) — 多Token同IP怎么查、订阅Token同IP检测、XBoard多账号同IP、Token关联IP追踪
 - [机场有内鬼怎么办？XBoard 订阅泄露的取证、判断与处置思路](./seed-security-7s4emc/) — 内鬼怎么办、XBoard 订阅共享排查、Token 多 IP 判断、可疑账号关联追踪、订阅泄露取证
