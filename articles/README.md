@@ -76,6 +76,7 @@
 - [机场有内鬼怎么办？XBoard 订阅泄露的取证、判断与处置思路](./seed-security-7s4emc/) — 内鬼怎么办、XBoard 订阅共享排查、Token 多 IP 判断、可疑账号关联追踪、订阅泄露取证
 - [节点池怎么自动更新：从手工维护到自动采集的完整思路](./seed-node-extension-kkpqek/) — 节点池怎么自动更新、XBoard 节点自动采集、第三方订阅自动同步、Clash YAML 自动导入节点
 - [节点失效怎么自动剔除？XBoard 节点健康检测与自动清理方法](./seed-node-extension-1kn15f5/) — 节点失效怎么自动剔除、XBoard 节点健康检测、第三方节点自动剔除、订阅节点自动检测失效、Clash YAML 节点维护
+- [内鬼常见问题：XBoard 订阅外泄的判断证据与误判边界](./seed-security-6cjyip/) — 内鬼常见问题、XBoard 订阅共享排查、Token 多 IP、同 IP 多 Token、账号关联追踪
 - [内鬼调查误判怎么避免：从异常现象到证据链的完整排查思路](./seed-security-jjncfd/) — 内鬼调查误判怎么避免、Token多IP排查、订阅共享判断、账号关联分析
 - [内鬼如何解决：XBoard 订阅泄露的证据链排查与人工复核思路](./seed-security-143c8g3/) — 内鬼如何解决、XBoard 订阅泄露排查、Token 多 IP 审计、账号关联追踪、订阅共享风险复核
 - [内鬼如何排查：XBoard 订阅泄露的证据链与人工复核方法](./seed-security-1affayo/) — 内鬼如何排查、XBoard 订阅泄露排查、Token 多 IP 分析、账号关联追踪、订阅共享审计
